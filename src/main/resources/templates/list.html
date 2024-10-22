@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List View</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <h1>List View</h1>
+    <form th:action="@{/search}" method="post">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search">
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="result : ${results}">
+                <td th:text="${result.id}">ID</td>
+                <td th:text="${result.name}">Name</td>
+                <td th:text="${result.description}">Description</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button th:if="${pageNumber > 1}" th:onclick="|window.location.href='?page=${pageNumber - 1}'|">Previous</button>
+        <span th:text="${pageNumber}">1</span>
+        <button th:if="${pageNumber < totalPages}" th:onclick="|window.location.href='?page=${pageNumber + 1}'|">Next</button>
+    </div>
+</body>
+</html>
